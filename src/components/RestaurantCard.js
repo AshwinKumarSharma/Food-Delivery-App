@@ -9,7 +9,7 @@ const RestaurantCard = (props) => {
     // const {resName, cuisines} = props;
     
     return (
-        <div className="w-1/6 p-1 mx-10 cursor-pointer hover:scale-95 duration-300">
+        <div className="w-1/6 p-1 mx-6 cursor-pointer hover:scale-95 duration-300">
             <img className="w-full h-3/6 rounded-xl" src= {RES_CARD_IMG + cloudinaryImageId} />
             <h3 className="font-semibold text-xl pt-4">{name}</h3>
             <h4 className="items-center">
