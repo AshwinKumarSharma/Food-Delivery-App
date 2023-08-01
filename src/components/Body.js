@@ -1,5 +1,8 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
+import Shimmer from "./Shimmer";
+
+
 const Body = () => {
     const [listOfRestaurant, setResList] = useState([]);
 
@@ -13,8 +16,7 @@ const Body = () => {
         setResList((json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants));
     }
 
-
-    return (
+    return (listOfRestaurant.length === 0)? <Shimmer/> : (
     <>
         <div className="m-5">
             <input type="text" className="border mx-5" />
