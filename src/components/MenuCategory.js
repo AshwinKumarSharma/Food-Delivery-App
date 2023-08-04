@@ -3,12 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MenuListItems from "./MenuListItems";
 import { useState } from "react";
 
-const MenuCategory = ({data}) => {
-
-    const [showMenuList, setShowMenuList] = useState(false);
+const MenuCategory = ({data, showMenuList, setShowIndex}) => {
 
     const handleClick = () => {
-        showMenuList ? setShowMenuList(false) : setShowMenuList(true);
+        setShowIndex();
+        
     }
     return (
         <div>

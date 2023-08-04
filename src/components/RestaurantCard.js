@@ -6,8 +6,6 @@ const RestaurantCard = (props) => {
     const {resData} = props;
     const {cloudinaryImageId, name, cuisines, avgRating, costForTwo, sla} = resData;
     
-    // const {resName, cuisines} = props;
-    
     return (
         <div className="p-4 mx-4 mb-1 w-[250px] cursor-pointer hover:scale-95 duration-300">
             <div>
