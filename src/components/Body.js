@@ -25,22 +25,27 @@ const Body = () => {
 
     if(onlineStatus === false) return <h1>Looks like you are Offline!!! Please Check your internet connection.</h1>
 
-    console.log(listOfRestaurant);  
+    const handleSearch = () => {
+        const filteredRestaurant = listOfRestaurant.filter(restaurant => (
+            restaurant.info.name.toLowerCase().includes(searchText.toLowerCase())));
+        setFilteredList(filteredRestaurant);
+    }
+
+    const handlekeyPress=(event)=>{
+        if(event.key === 'Enter'){
+            handleSearch();
+        }};
 
     return (listOfRestaurant.length === 0)? <Shimmer/> : (
     <>
         <div className="mt-10 mb-6 flex justify-center">
-            <input type="text" className="border mx-5 rounded-xl py-1 pl-2" value={searchText} onChange={(e) => {
+            <input type="text" className="border mx-5 rounded-xl py-1 pl-2" value={searchText} 
+            onKeyDown={handlekeyPress}
+            onChange={(e) => {
                 setSearchText(e.target.value);
             }}/>
 
-            <button className="border px-5 mx-2 rounded-xl py-1" onClick={
-                () => {
-                    const filteredRestaurant = listOfRestaurant.filter(restaurant => (
-                        restaurant.info.name.toLowerCase().includes(searchText.toLowerCase())));
-                    setFilteredList(filteredRestaurant);
-                }
-            }>Search</button>
+            <button className="border px-5 mx-2 rounded-xl py-1" onClick={handleSearch}>Search</button>
 
             <button className="border px-5 mx-2 rounded-xl py-1 focus:bg-gray-400" onClick={
                 () => {
