@@ -19,7 +19,7 @@ const Header = () => {
             </div>
             <div>
                 <ul className="flex text-xl font-semibold mx-5 items-center">
-                    <li>Online Status: {onlineStatus ? "🟢" : "🔴"}</li>
+                    <li> {onlineStatus ? "Online: 🟢" : "Offline: 🔴"}</li>
                     <li className="p-5 m-5 cursor-pointer"><Link to="/">Home</Link></li>
                     <li className="p-5 m-5 cursor-pointer"><Link to="/about">About</Link></li>
                     <li className="p-5 m-5 cursor-pointer"><Link to="/cart">Cart ({cartItems.length} items)</Link></li>

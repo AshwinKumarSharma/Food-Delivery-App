@@ -23,7 +23,7 @@ const Body = () => {
         setFilteredList((json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants) || (json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants));
     }
 
-    if(onlineStatus === false) return <h1>Looks like you are Offline!!! Please Check your internet connection.</h1>
+    if(onlineStatus === false) return <h1 className="text-2xl font-bold text-center my-5">Looks like you are Offline!!! Please Check your internet connection.</h1>
 
     const handleSearch = () => {
         const filteredRestaurant = listOfRestaurant.filter(restaurant => (
