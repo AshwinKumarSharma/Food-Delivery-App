@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -9,17 +9,20 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import Cart from "./components/Cart";
+import { ContextProvider } from "./context/LocationContext";
 
-
-
-const AppLayout = () => (
-    <Provider store={appStore}>
-        <div className="app">
-            <Header />
-            <Outlet />
-        </div>
-    </Provider>
-);
+const AppLayout = () => {
+    
+    return(
+        <ContextProvider>
+        <Provider store={appStore}>
+            <div className="app">
+                <Header />
+                <Outlet />
+            </div>
+        </Provider>
+        </ContextProvider>
+)};
 
 const appRouter = createBrowserRouter([
     {

@@ -4,31 +4,25 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { RESTAURANT_API } from "../utils/constants";
+import { useRestaurant } from "../context/LocationContext";
 
 
 const Body = () => {
-    const [listOfRestaurant, setResList] = useState([]);
-    const [filteredList, setFilteredList] = useState([]);
+    const Restaurant = useRestaurant();
     const [searchText, setSearchText] = useState("");
+    
     const onlineStatus = useOnlineStatus();
 
     useEffect(() => {
-        fetchData();
-    }, []);
-
-    const fetchData = async () => {
-        const data = await fetch(RESTAURANT_API);
-        const json = await data.json();
-        setResList((json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants) || (json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants));
-        setFilteredList((json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants) || (json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants));
-    }
+        Restaurant.fetchCurrentUserLocationData();
+    },[])
 
     if(onlineStatus === false) return <h1 className="text-2xl font-bold text-center my-5">Looks like you are Offline!!! Please Check your internet connection.</h1>
 
     const handleSearch = () => {
-        const filteredRestaurant = listOfRestaurant.filter(restaurant => (
+        const filteredRestaurant = Restaurant.listOfRestaurant.filter(restaurant => (
             restaurant.info.name.toLowerCase().includes(searchText.toLowerCase())));
-        setFilteredList(filteredRestaurant);
+            Restaurant.setFilteredList(filteredRestaurant);
     }
 
     const handlekeyPress=(event)=>{
@@ -36,8 +30,8 @@ const Body = () => {
             handleSearch();
         }};
 
-    return (listOfRestaurant.length === 0)? <Shimmer/> : (
-    <>
+    return (Restaurant.listOfRestaurant.length === 0)? <Shimmer/> : (
+    <>  
         <div className="mt-10 mb-6 flex justify-center">
             <input type="text" className="border mx-5 rounded-xl py-1 pl-2" value={searchText} 
             onKeyDown={handlekeyPress}
@@ -77,8 +71,12 @@ const Body = () => {
                 }}>Clear Filters</button>
         </div>
 
+        <div>
+            <h1 className="text-3xl my-4 mx-40 font-bold">{Restaurant.heading?.data?.cards[1]?.card?.card?.header?.title || Restaurant.heading?.data?.cards[2]?.card?.card?.header?.title}</h1>
+        </div>
+
         <div className="flex flex-wrap justify-center">
-            {filteredList.map((restaurant) => (
+            {Restaurant?.filteredList.map((restaurant) => (
                 <Link to={"/restaurant/" + restaurant.info.id} key={restaurant.info.id}>
                     <RestaurantCard resData={restaurant.info}/></Link>
             ))}
