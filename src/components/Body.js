@@ -43,31 +43,31 @@ const Body = () => {
 
             <button className="border px-5 mx-2 rounded-xl py-1 focus:bg-gray-400" onClick={
                 () => {
-                    const topRatedResList = listOfRestaurant.filter(restaurant => (
+                    const topRatedResList = Restaurant.listOfRestaurant.filter(restaurant => (
                         restaurant.info.avgRating >= 4));
-                    setFilteredList(topRatedResList);
+                        Restaurant.setFilteredList(topRatedResList);
                 }
             }>Rating 4.0 & above</button>
 
             <button className="border px-5 mx-2 rounded-xl py-1 focus:bg-gray-400 active:bg-gray-400" onClick={
                 () => {
-                    const fastDelivery = listOfRestaurant.filter(restaurant => (
+                    const fastDelivery = Restaurant.listOfRestaurant.filter(restaurant => (
                         restaurant.info.sla.deliveryTime < 25));
-                    setFilteredList(fastDelivery);
+                        Restaurant.setFilteredList(fastDelivery);
             }}>Fast Delivery</button>
 
             <button className="border px-5 mx-2 rounded-xl py-1 focus:bg-gray-400" onClick={
                 () => {
-                    const price = listOfRestaurant.filter((restaurant) => (Number(
+                    const price = Restaurant.listOfRestaurant.filter((restaurant) => (Number(
                         restaurant.info.costForTwo.match(/\b\d+\b/g)) < 300
                     ));
-                    setFilteredList(price);
+                    Restaurant.setFilteredList(price);
                 }
             }>Less than Rs. 300</button>
 
             <button className="border px-5 mx-2 rounded-xl py-1" onClick={
                 () => {
-                    setFilteredList(listOfRestaurant);
+                    Restaurant.setFilteredList(Restaurant.listOfRestaurant);
                 }}>Clear Filters</button>
         </div>
 

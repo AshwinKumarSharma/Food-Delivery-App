@@ -25,7 +25,7 @@ export const ContextProvider = (props) => {
     };
 
     return (
-        <LocationContext.Provider value={{listOfRestaurant, filteredList, heading, fetchCurrentUserLocationData}}>
+        <LocationContext.Provider value={{listOfRestaurant, filteredList, heading, setFilteredList,  fetchCurrentUserLocationData}}>
             {props.children}
         </LocationContext.Provider>
     )
